@@ -78,3 +78,79 @@ Components that take care of loading and managing data for their child component
 ##### The Ideal of Container Components
 Our components shoudn't know where their data is comming from.
 
+###### Load data
+```js
+export const UserLoader = ({ userId, children }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    (async() => {
+      const response = await axios.get(`/users/${userId}`);
+      setUser(response.data);
+    })()
+  }, [userId])
+
+  return (
+    <>
+      {
+        React.Children.map(children, child => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, { user });
+          }
+          return child;
+        })
+      }
+    </>
+  )
+};
+```
+
+###### Rsource Load data
+```js
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+
+export const ResourceLoader = ({
+  resourceUrl,
+  resourceName,
+  children,
+}) => {
+  const [state, setState] = useState(null);
+
+  useEffect(() => {
+    (async() => {
+      const response = await axios.get(resourceUrl);
+      setState(response.data);
+    })()
+  }, [resourceUrl])
+
+  return (
+    <>
+      {
+        React.Children.map(children, child => {
+          if (React.isValidElement(child)) {
+            return React.cloneElement(child, { [resourceName]: state });
+          }
+          return child;
+        })
+      }
+    </>
+  )
+};
+```
+`React.Children` Provides utilities to deal with the opaque data structure of this.props.children [Docs](https://es.reactjs.org/docs/react-api.html).
+```js
+React.Children.map(children, function[(thisArg)])
+```
+`React.isValidElement` Verifies that the object is a React element. Returns true or false.
+```js
+React.isValidElement(object)
+```
+`React.cloneElement` Clona y retorna un elemento React usando element como punto de partida. `config` debe contener todas las nuevas `props`, `key`, o `ref`.
+```js
+React.cloneElement(
+  element,
+  [config],
+  [...children]
+)
+```
