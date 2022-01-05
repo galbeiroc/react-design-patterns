@@ -1,5 +1,5 @@
-export const LargePersonList = ({ item }) => {
-  const { name, age, hairColor, hobbies } = item;
+export const LargePersonList = ({ person }) => {
+  const { name, age, hairColor, hobbies } = person;
 
   return (
     <> 

@@ -18,8 +18,8 @@ const RightComponent = ({ message }) => {
 function App() {
   return (
     <>
-      <RegularList items={people} resourceName="item" itemComponent={SmallPersonList}/>
-      <RegularList items={people} resourceName="item" itemComponent={LargePersonList}/>
+      <RegularList items={people} resourceName="person" itemComponent={SmallPersonList}/>
+      <RegularList items={people} resourceName="person" itemComponent={LargePersonList}/>
     </>
   );
 }
