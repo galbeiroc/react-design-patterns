@@ -1,9 +1,13 @@
-import './App.css';
+import { CurrentUser } from './components/CurrentUser';
+import { UserInfo } from './components/UserInfo';
 
 function App() {
   return (
-    <div className="App">
+    <div>
         <h3>Container component</h3>
+        <CurrentUser>
+          <UserInfo />
+        </CurrentUser>
     </div>
   );
 }
