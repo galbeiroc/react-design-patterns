@@ -146,7 +146,7 @@ React.Children.map(children, function[(thisArg)])
 ```js
 React.isValidElement(object)
 ```
-`React.cloneElement` Clona y retorna un elemento React usando element como punto de partida. `config` debe contener todas las nuevas `props`, `key`, o `ref`.
+`React.cloneElement` Clones and returns a React element using element as a starting point. `config` must contain all new `props`, `key`, or `ref`.
 ```js
 React.cloneElement(
   element,
@@ -154,3 +154,35 @@ React.cloneElement(
   [...children]
 )
 ```
+
+
+#### Controlled vs Uncontrolled Component
+
+* `Uncontrolled Components` Components that keep track of their own states and release data only when some events occurrs (that is, the submit event for HTML forms).
+
+```js
+export const UncontrolledForm = () => {
+  const nameIput = React.createRef();
+  const ageInput = React.createRef();
+  const hairInput = React.createRef();
+
+  const handleSubmit = e => {
+    console.log(nameIput.current.value, ageInput.current.value, hairInput.current.value);
+    e.preventDefault();
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name='name' placeholder='Name' ref={nameIput} />
+      <input type="number" name='age' placeholder='Age' ref={ageInput} />
+      <input type="text" name='hairColor' placeholder='Hair Color' ref={hairInput} />
+      <input type="submit" value='Submit' />
+    </form>
+  )
+}
+```
+
+* `Controlled Components` Component that do not keep track of their own state -- all state is passed in as props (that is, when we use useState Hook with text inputs).
+
+##### How Do We Choose?
+We Generally prefer controlled components, and there are several reason for this, the main reason is that it just makes our components more reusable and it also makes a lot easier to test.
