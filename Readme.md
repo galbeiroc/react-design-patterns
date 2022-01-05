@@ -184,5 +184,34 @@ export const UncontrolledForm = () => {
 
 * `Controlled Components` Component that do not keep track of their own state -- all state is passed in as props (that is, when we use useState Hook with text inputs).
 
+```js
+export const ControlledForm = () => {
+  const [name, setName] = useState('');
+  const [age, setAge] = useState(0);
+  const [hairColor, setHairColor] = useState('');
+  const [inputError, setInputError] = useState('');
+
+  useEffect(() => {
+    if (name.length < 2) {
+      setInputError('Name must have 2 or 3 characters')
+    } else {
+      setInputError('');
+    }
+  }, [name])
+
+  return (
+    <>
+      {inputError && <p>{inputError}</p>}
+      <form>
+        <input type="text" name='name' placeholder='Name' value={name} onChange={e => setName(e.target.value)} />
+        <input type="number" name='age' placeholder='Age' value={age} onChange={e => setAge(Number(e.target.value))} />
+        <input type="text" name='hairColor' placeholder='Hair Color' value={hairColor} onChange={e => setHairColor(e.target.value)} />
+        <button>Submit</button>
+      </form>
+    </>
+  )
+}
+```
+
 ##### How Do We Choose?
 We Generally prefer controlled components, and there are several reason for this, the main reason is that it just makes our components more reusable and it also makes a lot easier to test.
