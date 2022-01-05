@@ -1,8 +1,7 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
-export const ResourceLoader = ({
-  resourceUrl,
+export const DataSource = ({
+  getDataFunc = () => {},
   resourceName,
   children,
 }) => {
@@ -10,10 +9,10 @@ export const ResourceLoader = ({
 
   useEffect(() => {
     (async() => {
-      const response = await axios.get(resourceUrl);
-      setState(response.data);
+      const data = await getDataFunc();
+      setState(data);
     })()
-  }, [resourceUrl])
+  }, [getDataFunc])
 
   return (
     <>
