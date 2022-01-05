@@ -12,12 +12,21 @@ const getDataServer = (url) => async() => {
   return response.data;
 }
 
+const getLocalStorage = key => () => {
+  return localStorage.getItem(key)
+}
+
+const Text = ({ message }) => <h3>{message}</h3>;
+
 function App() {
   return (
     <div>
         <h3>Container component</h3>
         <DataSource getDataFunc={getDataServer('/users/102')} resourceName="user">
           <UserInfo />
+        </DataSource>
+        <DataSource getDataFunc={getLocalStorage('message')} resourceName="message">
+          <Text />
         </DataSource>
     </div>
   );
