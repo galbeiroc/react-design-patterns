@@ -72,4 +72,9 @@ export const Modal = ({ children }) => {
 ##### The Ideal of Layout Components
 Our components shoudn't know where they are being displayed on the page.
 
+#### Container Component
+Components that take care of loading and managing data for their child components.
+
+##### The Ideal of Container Components
+Our components shoudn't know where their data is comming from.
 
