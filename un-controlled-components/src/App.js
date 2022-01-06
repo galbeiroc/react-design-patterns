@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import { ControlledForm } from './ControlledForm';
 import { UncontrolledForm } from './UncontrolledForm';
 import { UncontrolledModal } from './UncontrolledModal';
@@ -5,6 +7,7 @@ import { ControlledModal } from './ControlledModal';
 import { UncontrolledOnboardingFlow } from './UncontrolledOnboardingFlow';
 
 import './App.css';
+import { ControlledOnboardingFlow } from './ControlledOnboardingFlow';
 
 const StepOne = ({ goToNext }) => (
   <>
@@ -28,17 +31,31 @@ const StepThree = ({ goToNext }) => (
 );
 
 function App() {
+  const [onboardingData, setOnboardingData] = useState({});
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onNext = stepData => {
+    setOnboardingData({
+      ...onboardingData,
+      ...stepData,
+    });
+    setCurrentIndex(currentIndex + 1);
+  };
+
   return (
     <>
-    <UncontrolledOnboardingFlow onFinish={data => {
-        console.log(data);
-        alert('Onboarding complete!')
+    <ControlledOnboardingFlow
+      currentIndex={currentIndex}
+      onFinish={() => {
+        console.log('Complete');
+        alert('Onboarding complete!');
       }}
+      onNext={onNext}
     >
       <StepOne />
       <StepTwo />
       <StepThree />
-    </UncontrolledOnboardingFlow>
+    </ControlledOnboardingFlow>
     </>
   );
 }
