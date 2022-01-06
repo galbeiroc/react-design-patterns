@@ -139,6 +139,7 @@ export const ResourceLoader = ({
 };
 ```
 `React.Children` Provides utilities to deal with the opaque data structure of this.props.children [Docs](https://es.reactjs.org/docs/react-api.html).
+`React.Children.map` Invoke a function on each immediate child within `children` with `this` set to `thisArg`. If `children` is an array, it will be traversed and the function will be called for each child in the array. If children is `null` or `undefined`, this method will return `null` or `undefined` instead of an array.
 ```js
 React.Children.map(children, function[(thisArg)])
 ```
@@ -215,3 +216,8 @@ export const ControlledForm = () => {
 
 ##### How Do We Choose?
 We Generally prefer controlled components, and there are several reason for this, the main reason is that it just makes our components more reusable and it also makes a lot easier to test.
+
+`React.Children.toArray` Returns the opaque data structure of `children` as a flat array with keys assigned to each child. Useful if you want to manipulate collections of children in rendering methods, particularly if you want to reorder or segment `this.props.children` before passing it.
+```js
+React.Children.toArray(children)
+```
