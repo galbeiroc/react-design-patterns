@@ -1,15 +1,17 @@
 import { UserInfo } from './components/UserInfo';
 import { printPropsHoc } from './components/printPropsHoc';
+import { withUser } from './components/withUser';
 
 import './App.css';
 
 const UserInfoWrapper = printPropsHoc(UserInfo);
+const UserInfoWithLoader = withUser(UserInfo, '102');
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <h3>Higher Order Components</h3>
-      <UserInfoWrapper a="hello" b={2} c='black' />
+      <UserInfoWithLoader />
     </div>
   );
 }
