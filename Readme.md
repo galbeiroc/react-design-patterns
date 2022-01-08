@@ -221,3 +221,11 @@ We Generally prefer controlled components, and there are several reason for this
 ```js
 React.Children.toArray(children)
 ```
+
+### Higher Order Components
+A component that returns another component instead of JSX
+Higher-Order-Components are just functions
+
+##### HOCs are used for
+Sharing complex behavior between multiple components (much like container components).
+Adding extra funcionality to existing components.
