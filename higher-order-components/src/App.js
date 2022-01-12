@@ -1,6 +1,6 @@
 import { UserInfo } from './components/UserInfo';
-import { printPropsHoc } from './components/printPropsHoc';
-import { withUser } from './components/withUser';
+import { printPropsHoc } from './HOC/printPropsHoc';
+import { withUser } from './HOC/withUser';
 
 import './App.css';
 
