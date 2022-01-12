@@ -308,3 +308,19 @@ export const UserInfo = ({ userId }) => {
   ...
 }
 ```
+
+### Functional Programming
+Functional programming is very broad topic.
+* A method of organizing code in a way that:
+
+1. Minimizes mutation and state change.
+2. Keeps functions independent of external data (call pure functions).
+3. Treats functions as first-class citizens.
+
+##### Applications of FP in React
+* Controlled control
+* Function components
+* Higher-order components
+* Recursive components
+* Partially applied components
+* Components composition
