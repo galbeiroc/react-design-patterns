@@ -278,3 +278,33 @@ Special hooks that we define ourselves, and that usually combine the functionali
 
 ##### Custom hooks are used  for
 Sharing complex behavior between multiples components (much like with HOCs and Container components).
+
+
+```js
+// useDataSource.js
+import { useEffect, useState } from "react";
+
+export const useDataResource = getResourceFunc => {
+  const [resource, setResource] = useState(null);
+
+  useEffect(() => {
+    (async() => {
+      const result = await getResourceFunc();
+      setResource(result);
+    })();
+  }, [getResourceFunc])
+
+  return resource;
+};
+// UserInfo.js
+const serverResource = url => async () => {
+  const response = await axios.get(url);
+  return response.data
+}
+
+export const UserInfo = ({ userId }) => {
+  // const user = useResource(`/users/${userId}`);
+  const user = useDataResource(serverResource(`/users/${userId}`));
+  ...
+}
+```
