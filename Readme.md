@@ -271,3 +271,10 @@ export const withEditableResource = (Component, resourePath, resourceName) => {
   }
 }
 ```
+
+### Custom Hooks
+Special hooks that we define ourselves, and that usually combine the functionality of one omre existing React hooks like `useState` or `useEffect`
+
+
+##### Custom hooks are used  for
+Sharing complex behavior between multiples components (much like with HOCs and Container components).
