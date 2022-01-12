@@ -4,7 +4,7 @@ function App() {
   return (
     <div>
       <h3>Custom Hooks</h3>
-      <UserInfo />
+      <UserInfo userId='103' />
     </div>
   );
 }
