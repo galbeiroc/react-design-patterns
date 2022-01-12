@@ -229,3 +229,45 @@ Higher-Order-Components are just functions
 ##### HOCs are used for
 Sharing complex behavior between multiple components (much like container components).
 Adding extra funcionality to existing components.
+
+```js
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const withEditableResource = (Component, resourePath, resourceName) => {
+  return (props) => {
+    const [originalData, setOriginalData] = useState(null);
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+      (async() => {
+        const response = await axios.get(resourePath);
+        setOriginalData(response.data);
+        setData(response.data);
+      })()
+    }, []);
+
+    const onChange = changes => {
+      setData({ ...data, ...changes });
+    };
+
+    const onSave = async () => {
+      const response = await axios.post(resourePath, { [resourceName]: data });
+      setOriginalData(response.data);
+      setData(response.data);
+    };
+
+    const onReset = () => {
+      setData(originalData);
+    }
+
+    const resourceProps = {
+      [resourceName]: data,
+      [`onChange${capitalize(resourceName)}`]: onChange,
+      [`onSave${capitalize(resourceName)}`]: onSave,
+      [`onReset${capitalize(resourceName)}`]: onReset,
+    };
+
+    return <Component {...props} {...resourceProps} />
+  }
+}
+```
