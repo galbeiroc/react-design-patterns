@@ -308,3 +308,113 @@ export const UserInfo = ({ userId }) => {
   ...
 }
 ```
+
+### Functional Programming
+Functional programming is very broad topic.
+* A method of organizing code in a way that:
+
+1. Minimizes mutation and state change.
+2. Keeps functions independent of external data (call pure functions).
+3. Treats functions as first-class citizens.
+
+##### Applications of FP in React
+* Controlled control
+* Function components
+* Higher-order components
+* Recursive components
+* Composition components
+* Partially applied components
+
+`Recursive components`
+Basic idea of what recursion is, let’s apply it to some React code.
+
+```js
+const isObject = x => typeof x === 'object' && x !== null;
+
+export const RecursiveComponent = ({ data }) => {
+  if (!isObject(data)) {
+    return (
+      <li>{data}</li>
+    )
+  }
+
+  const pairs = Object.entries(data);
+
+  return (
+    <>
+      {
+        pairs.map(([key, value]) => (
+          <li>
+            {key}:
+            <ul>
+              <RecursiveComponent data={value} />
+            </ul>
+          </li>
+        ))
+      }
+    </>
+  )
+}
+```
+
+`Composition components`
+The way React components are designed makes it very easy to compose them. A React component can control how another component is rendered by providing props to it, and even control whether it is rendered at all.
+
+```js
+export const Button = ({ size, color, text, ...props }) => {
+  return (
+    <button 
+      style={{
+        padding: size === 'large' ? '32px' : '8px',
+        fontSize: size === 'large' ? '32px' : '16px',
+        backgroundColor: color,
+      }}
+      {...props}
+    >
+      {text}
+    </button>
+  )
+};
+
+export const DangerButton = props => {
+  return (
+    <Button {...props} color='red' />
+  )
+}
+
+export const BigSuccessButton = props => {
+  return (
+    <Button {...props} size='large' color='green' />
+  )
+}
+```
+
+`Partially applied components`
+refers to the process of fixing a number of arguments to a function, producing another function of smaller arity.
+
+```js
+export const PartiallyApply = (Component, partialProps) => {
+  return props => (
+    <Component {...partialProps} {...props} />
+  )
+};
+
+export const Button = ({ size, color, text, ...props }) => {
+  return (
+    <button 
+      style={{
+        padding: size === 'large' ? '32px' : '8px',
+        fontSize: size === 'large' ? '32px' : '16px',
+        backgroundColor: color,
+      }}
+      {...props}
+    >
+      {text}
+    </button>
+  )
+};
+
+
+export const DangerButtonp = PartiallyApply(Button, { color: 'red' });
+export const BigSuccessButtonp = PartiallyApply(Button, { color: 'green', size: 'large' });
+```
