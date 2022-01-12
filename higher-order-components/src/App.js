@@ -1,6 +1,7 @@
 import { UserInfo } from './components/UserInfo';
 import { printPropsHoc } from './HOC/printPropsHoc';
 import { withUser } from './HOC/withUser';
+import { UserInfoForm } from './components/UserInfoForm'
 
 import './App.css';
 
@@ -11,7 +12,7 @@ function App() {
   return (
     <div>
       <h3>Higher Order Components</h3>
-      <UserInfoWithLoader />
+      <UserInfoForm />
     </div>
   );
 }
