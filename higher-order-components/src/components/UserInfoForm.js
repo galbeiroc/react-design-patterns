@@ -1,6 +1,7 @@
 import { withEditableUser } from '../HOC/withEditableUser';
+import { withEditableResource } from '../HOC/withEditableResource';
 
-export const UserInfoForm = withEditableUser(({
+export const UserInfoForm = withEditableResource(({
   user,
   onChangeUser,
   onSaveUser,
@@ -26,4 +27,4 @@ export const UserInfoForm = withEditableUser(({
       <button onClick={onSaveUser}>Save</button>
     </>
   ) : <p>Loading...</p>
-}, '102');
+}, '/users/103', 'user');
